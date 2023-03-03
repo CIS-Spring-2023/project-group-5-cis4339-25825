@@ -1,15 +1,19 @@
-<script>
-import { Chart, registerables } from 'chart.js'
-Chart.register(...registerables)
+<template>
+  <canvas ref="mychart"></canvas>
+</template>
 
+<script>
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
 export default {
   props: {
     label: {
-      type: Array
+      type: Array,
     },
     chartData: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   async mounted() {
     const backgroundColor = this.chartData.map(() => this.getColor())
