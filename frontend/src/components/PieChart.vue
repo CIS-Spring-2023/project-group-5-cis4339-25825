@@ -1,46 +1,23 @@
 <template>
   <div>
-    <canvas ref="mychart"></canvas>
+    <canvas ref="piechart"></canvas>
   </div>
 </template>
 
 <script>
-import Chart from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+import pieChartData from '../pie-data.js'
 
+Chart.register(...registerables);
 export default {
-  name: '',
-  props: {
-    msg: String
+  name: 'PieChart',
+  data() {
+    return {
+      pieChartData: pieChartData
+    }
   },
-  mounted() {
-    console.log('Component mounted')
-
-    const ctx = document.getElementById('mychart');
-
-    const data = {
-  labels: [
-    'Red',
-    'Blue',
-    'Yellow'
-  ],
-  datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)'
-    ],
-    hoverOffset: 4
-  }]
-};
-
-const mychart = new Chart(ctx, {
-    type: 'pie',
-  data: data,
-});
-
-mychart;
+  mounted() {const ctx = document.getElementById('piechart');
+    new Chart(ctx, this.pieChartData);
   }
 }
 
