@@ -87,7 +87,7 @@ export default {
             <div>
               <h2 class="font-bold text-2xl text-black-700 tracking-widest text-center mt-10">
                 Number of Events by Zip Code</h2>
-              <!--CHART-->
+              <!--Chart display here, I want the loading of events to be at the bottom-->
               <PieChart/>
             </div>
 
