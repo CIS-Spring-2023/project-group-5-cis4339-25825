@@ -25,6 +25,23 @@ const routes = [
     component: () => import('../components/updateClient.vue')
   },
   {
+    path: '/serviceform',
+    name: 'serviceform',
+    props: true,
+    component: () => import('../components/serviceForm.vue')
+  },
+  /*{
+    path: '/findservice',
+    name: 'findservice',
+    component: () => import('../components/findService.vue')
+  },
+  {
+    path: '/updateservice/:id',
+    name: 'updateservice',
+    props: true,
+    component: () => import('../components/updateService.vue')
+  },*/
+  {
     path: '/eventform',
     name: 'eventform',
     component: () => import('../components/eventForm.vue')
