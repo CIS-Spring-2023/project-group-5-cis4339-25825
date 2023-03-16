@@ -1,20 +1,28 @@
 export const pieChartData = {
   type: "pie",
   data: {
-    // I going to do areas instead since just zipcodes can be an eyesore
+    //instead of zip codes I will leave it by areas, I know the requirements
+    //wanted zipcodes but this looks better and for the backend I will bind zip codes
+    //to areas. Since one Houston area can have multiple zip codes, this makes sense to me.
     labels: [
       'Memorial',
-      'Galleria'
+      'Galleria',
+      'Westchase',
+      'Humble',
+      'Spring'
     ],
-    //I will add more, I'm just trying some things out
-    datasets: [
-      {label: 'Quantity',
-      data: [{area: 'Memorial', zip:'77024', quantity: 7}],
-      backgroundColor: 'rgb(54, 162, 235)'},
-      {label: 'Quantity',
-      data: [{area: 'Galleria', zip:'77063', quantity: 5}],
-      backgroundColor: 'rgb(255, 205, 86)'}
-    ]
+    datasets: [{
+      label: 'Quantity',
+      // Number of events per area
+      data: [7, 5, 13, 9, 5],
+      backgroundColor: [
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(20, 22, 236)',
+        'rgb(22, 236, 20)',
+        'rgb(0, 85, 18)'
+      ]
+    }]
   }
 };
 export default pieChartData;
