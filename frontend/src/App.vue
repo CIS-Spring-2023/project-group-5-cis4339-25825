@@ -56,6 +56,16 @@ export default {
               </router-link>
             </li>
             <li>
+              <router-link to="/serviceform">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >event</span
+                >
+                Create Service
+              </router-link>
+            </li>
+            <li>
               <router-link to="/findclient">
                 <span
                   style="position: relative; top: 6px"
@@ -74,6 +84,26 @@ export default {
                 Find Event
               </router-link>
             </li>
+            <li>
+              <router-link to="/findservices">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >search</span>
+                Find Service
+              </router-link>
+            </li>
+
+            <li>
+              <router-link to="/updateservices">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >search</span>
+                Update Service
+              </router-link>
+            </li>
+
             <li>
               <router-link to="/Login">
                 <span style="position: relative; top: 6px"
