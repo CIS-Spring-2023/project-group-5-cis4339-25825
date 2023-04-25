@@ -1,21 +1,5 @@
-<script>
-import axios from 'axios'
-const apiURL = import.meta.env.VITE_ROOT_API
+<!-- Display only a portion in the navigation panel until someone logs in-->
 
-export default {
-  name: 'App',
-  data() {
-    return {
-      orgName: 'Dataplatform'
-    }
-  },
-  created() {
-    axios.get(`${apiURL}/org`).then((res) => {
-      this.orgName = res.data.name
-    })
-  }
-}
-</script>
 <template>
   <main class="flex flex-row">
     <div id="_container" class="h-screen">
@@ -25,6 +9,24 @@ export default {
         </section>
         <nav class="mt-10">
           <ul class="flex flex-col gap-4">
+              <li class="nav-item" v-if="!user.isLoggedIn">
+              <router-link to="/loginPage">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >login</span
+                >
+                Login
+              </router-link>
+              </li>
+              <li v-if="user.isLoggedIn">
+                <a>                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >account_circle</span
+                > Welcome, {{ user.name }}
+              </a>
+            </li>          
             <li>
               <router-link to="/">
                 <span
@@ -35,7 +37,7 @@ export default {
                 Dashboard
               </router-link>
             </li>
-            <li>
+            <li v-if="user.isLoggedIn && user.role === 1">
               <router-link to="/intakeform">
                 <span
                   style="position: relative; top: 6px"
@@ -45,7 +47,17 @@ export default {
                 Client Intake Form
               </router-link>
             </li>
-            <li>
+            <li v-if="user.isLoggedIn">
+              <router-link to="/findclient">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >person_search</span
+                >
+                Find Client
+              </router-link>
+            </li>
+            <li v-if="user.isLoggedIn && user.role === 1">
               <router-link to="/eventform">
                 <span
                   style="position: relative; top: 6px"
@@ -55,61 +67,45 @@ export default {
                 Create Event
               </router-link>
             </li>
-            <li>
-              <router-link to="/serviceform">
-                <span
-                  style="position: relative; top: 6px"
-                  class="material-icons"
-                  >event</span
-                >
-                Create Service
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/findclient">
+            <li v-if="user.isLoggedIn">
+              <router-link to="/findevents">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
                   >search</span
                 >
-                Find Client
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/findevents">
-                <span
-                  style="position: relative; top: 6px"
-                  class="material-icons"
-                  >search</span>
                 Find Event
               </router-link>
             </li>
-            <li>
+            <li v-if="user.isLoggedIn && user.role === 1">
+              <router-link to="/addService">
+                <span
+                  style="position: relative; top: 6px"
+                  class="material-icons"
+                  >add_circle</span>
+                Add Service
+              </router-link>
+            </li>
+            <li v-if="user.isLoggedIn">
               <router-link to="/findservices">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
-                  >search</span>
+                  >manage_search</span
+                >
                 Find Service
               </router-link>
             </li>
-
-            <li>
-              <router-link to="/updateservices">
-                <span
-                  style="position: relative; top: 6px"
-                  class="material-icons"
-                  >search</span>
-                Update Service
-              </router-link>
-            </li>
-
-            <li>
-              <router-link to="/Login">
-                <span style="position: relative; top: 6px"
-                class="material-icons">person</span>Login
-              </router-link>
-            </li>
+            
+            <li v-if="user.isLoggedIn">
+                <br>
+                <a href="">
+                  <span
+                  @click="store.logout()" class="nav-link"><i style="position: relative; top: 6px"
+                  class="material-icons">logout</i>
+                  </span> Logout 
+                </a>
+              </li>
           </ul>
         </nav>
       </header>
@@ -127,6 +123,32 @@ export default {
     </div>
   </main>
 </template>
+
+<script>
+import axios from 'axios'
+const apiURL = import.meta.env.VITE_ROOT_API
+import { useLoggedInUserStore } from "@/store/loggedInUser";
+
+export default {
+  name: 'App',
+  data() {
+    return {
+      orgName: 'Dataplatform'
+    }
+  },
+  created() {
+    axios.get(`${apiURL}/org`).then((res) => {
+      this.orgName = res.data.name
+    })
+  },
+    setup() {
+    const user = useLoggedInUserStore();
+    return { user };
+  }
+}
+</script>
+
+
 <style>
 #_container {
   background-color: #c8102e;

@@ -1,70 +1,85 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
 // make all paths and names lowercase for consistency
 const routes = [
   {
+    path: '/login',
+    name: 'login',
+    props: true,
+    component: () => import('../components/login.vue'),
+    meta: { requiresAuth: false}
+  },
+  {
     path: '/',
+    name: 'home',
     props: true,
-    component: () => import('../components/homePage.vue')
+    component: () => import('../components/homePage.vue'),
+    meta: { requiresAuth: true}
   },
   {
-    path: '/intakeform',
-    name: 'intakeform',
+    path: '/addService',
+    name: 'addService',
     props: true,
-    component: () => import('../components/intakeForm.vue')
+    component: () => import('../components/addService.vue'),
+    meta: { requiresAuth: true, role: 1 }
   },
   {
-    path: '/findclient',
-    name: 'findclient',
-    component: () => import('../components/findClient.vue')
+    path: '/findservice',
+    name: 'findservice',
+    component: () => import('../components/findService.vue'),
+    meta: { requiresAuth: true}
   },
-  {
-    path: '/updateclient/:id',
-    name: 'updateclient',
-    props: true,
-    component: () => import('../components/updateClient.vue')
-  },
-  {
-    path: '/serviceform',
-    name: 'serviceform',
-    props: true,
-    component: () => import('../components/serviceForm.vue')
-  },
-  {
-    path: '/findservices',
-    name: 'findservices',
-    component: () => import('../components/findService.vue')
-  },
-  {
-    path: '/updateservice/:id',
-    name: 'updateservice',
-    props: true,
-    component: () => import('../components/updateService.vue')
-  },
-  {
-    path: '/eventform',
-    name: 'eventform',
-    component: () => import('../components/eventForm.vue')
-  },
-  {
-    path: '/findevents',
-    name: 'findevents',
-    component: () => import('../components/findEvents.vue')
-  },
-  {
-    path: '/eventdetails/:id',
-    name: 'eventdetails',
-    props: true,
-    component: () => import('../components/eventDetails.vue')
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import('../views/login.vue')
-  }
-]
-const router = createRouter({
-  history: createWebHistory(),
-  routes
-})
-export default router
+    {
+      path: '/intakeform',
+      name: 'intakeform',
+      props: true,
+      component: () => import('../components/intakeForm.vue'),
+      meta: { requiresAuth: true, role: 1 }
+    },
+    {
+      path: '/findclient',
+      name: 'findclient',
+      component: () => import('../components/findClient.vue'),
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/updateclient/:id',
+      name: 'updateclient',
+      props: true,
+      component: () => import('../components/updateClient.vue'),
+      meta: { requiresAuth: true, role: 1 }
+    },
+    {
+      path: '/eventform',
+      name: 'eventform',
+      component: () => import('../components/eventForm.vue'),
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/findevents',
+      name: 'findevents',
+      component: () => import('../components/findEvents.vue'),
+      meta: { requiresAuth: true, role: 1}
+    },
+    {
+      path: '/eventdetails/:id',
+      name: 'eventdetails',
+      props: true,
+      component: () => import('../components/eventDetails.vue'),
+      meta: { requiresAuth: true}
+    },
+    {
+      path: '/editService/:id',
+      name: 'editservice',
+      props: true,
+      component: () => import('../components/editService.vue'),
+      meta: { requiresAuth: true, role: 1 }
+    }
+    
+  ]
+  const router = createRouter({
+    history: createWebHistory(),
+    routes
+  })
+
+  export default router
+
