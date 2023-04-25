@@ -10,7 +10,6 @@ export default {
   },
   data() {
     return {
-      // removed unnecessary extra array to track services
       event: {
         name: '',
         services: [],
@@ -23,9 +22,21 @@ export default {
           zip: ''
         },
         description: ''
-      }
+      },
+      serviceInfo: [] //create an empty array for service data
     }
   },
+  
+  mounted() 
+  {   //Get service data from local storage display in the Create new event form 
+      const data = JSON.parse(localStorage.getItem('service'));
+      if(data)
+      {
+      this.serviceInfo = data;
+      }
+      console.log(this.serviceInfo)
+  },
+
   methods: {
     async handleSubmitForm() {
       // Checks to see if there are any errors in validation
@@ -175,18 +186,21 @@ export default {
                 <span class="ml-2">Youth Services Program</span>
               </label>
             </div>
-            <div>
-              <label for="childhoodEducation" class="inline-flex items-center">
+            <!-- Loop through the serviceInfo array with v-for>-->
+            <div v-for="item in serviceInfo">
+              <div v-if="item.status !== 'Inactive'"> <!--v-if to display service with active status only -->
+              <label for="${item.name}" class="inline-flex items-center">
                 <input
                   type="checkbox"
-                  id="childhoodEducation"
-                  value="Early Childhood Education"
+                  id="${item.name}"
+                  value="${item.name}"
                   v-model="event.services"
                   class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-offset-0 focus:ring-indigo-200 focus:ring-opacity-50"
                   notchecked
                 />
-                <span class="ml-2">Early Childhood Education</span>
+                <span class="ml-2">{{ item.name }}</span>
               </label>
+              </div>
             </div>
           </div>
         </div>

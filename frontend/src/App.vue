@@ -10,7 +10,7 @@
         <nav class="mt-10">
           <ul class="flex flex-col gap-4">
               <li class="nav-item" v-if="!user.isLoggedIn">
-              <router-link to="/loginPage">
+              <router-link to="/login">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
@@ -44,7 +44,7 @@
                   class="material-icons"
                   >people</span
                 >
-                Client Intake Form
+                Client Intake
               </router-link>
             </li>
             <li v-if="user.isLoggedIn">
@@ -78,7 +78,7 @@
               </router-link>
             </li>
             <li v-if="user.isLoggedIn && user.role === 1">
-              <router-link to="/addService">
+              <router-link to="/addservice">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"

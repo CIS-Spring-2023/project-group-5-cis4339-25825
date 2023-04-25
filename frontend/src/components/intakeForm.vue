@@ -26,9 +26,6 @@ export default {
           city: '',
           county: '',
           zip: ''
-        },
-        service: {
-          service: ''
         }
       }
     }
@@ -309,7 +306,6 @@ export default {
             </label>
           </div>
           <div></div>
-
           <!-- submit button -->
           <div class="flex justify-between mt-10 mr-20">
             <button class="bg-red-700 text-white rounded" type="submit">
@@ -321,3 +317,4 @@ export default {
     </div>
   </main>
 </template>
+

@@ -1,12 +1,15 @@
 <script>
 import { DateTime } from 'luxon'
 import axios from 'axios'
-// Import Chart from PieChart.vue
+// Import pie chart
 import PieChart from './PieChart.vue'
+//Import bar chart
+import attendanceChart from './barChart.vue'
 const apiURL = import.meta.env.VITE_ROOT_API
 
 export default {
   components: {
+    attendanceChart,
     PieChart
   },
   data() {
@@ -63,7 +66,7 @@ export default {
         .setZone(DateTime.now().zoneName, { keepLocalTime: true })
         .toLocaleString()
     },
-    // method to allow click through table to event details
+    // method to allow click through table for event details
     editEvent(eventID) {
       this.$router.push({ name: 'eventdetails', params: { id: eventID } })
     }
@@ -75,43 +78,16 @@ export default {
   <main>
     <div>
       <h1
-        class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10">
-        Event Dashboard
+        class="font-bold text-4xl text-red-700 tracking-widest text-center mt-10"
+      >
+        Events Dashboard
       </h1>
+      <br />
       <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10"
       >
         <div class="ml-10"></div>
         <div class="flex flex-col col-span-2">
-          <div>
-            <div>
-              <h2 class="font-bold text-2xl text-black-700 tracking-widest text-center mt-10">
-                Number of Events by Zip Code</h2>
-              <!--Chart display here, I want the loading of events to be at the bottom-->
-              <PieChart/>
-            </div>
-
-            <!-- Start of loading animation -->
-            <div class="mt-40" v-if="loading">
-              <p
-                class="text-6xl font-bold text-center text-gray-500 animate-pulse"
-              >
-                Loading...
-              </p>
-            </div>
-            <!-- End of loading animation -->
-
-            <!-- Start of error alert -->
-            <div class="mt-12 bg-red-50" v-if="error">
-              <h3 class="px-4 py-1 text-4xl font-bold text-white bg-red-800">
-                {{ error.title }}
-              </h3>
-              <p class="p-4 text-lg font-bold text-red-900">
-                {{ error.message }}
-              </p>
-            </div>
-            <!-- End of error alert -->
-          </div>
           <table class="min-w-full shadow-md rounded">
             <thead class="bg-gray-50 text-xl">
               <tr class="p-4 text-left">
@@ -132,6 +108,37 @@ export default {
               </tr>
             </tbody>
           </table>
+          <div>
+            <!-- Start of loading animation -->
+            <div class="mt-40" v-if="loading">
+              <p
+                class="text-6xl font-bold text-center text-gray-500 animate-pulse"
+              >
+                Loading...
+              </p>
+            </div>
+            <!-- End of loading animation -->
+
+            <!-- Start of error alert -->
+            <div class="mt-12 bg-red-50" v-if="error">
+              <h3 class="px-4 py-1 text-4xl font-bold text-white bg-red-800">
+                {{ error.title }}
+              </h3>
+              <p class="p-4 text-lg font-bold text-red-900">
+                {{ error.message }}
+              </p>
+            </div>
+            <!-- End of error alert -->
+            <div>
+            <attendanceChart
+               
+              :label="labels"
+              :chart-data="chartData"
+            ></attendanceChart>
+              <!--v-if="loading && error" Put inside Attendance Chart when Sprint 3 -->
+            <PieChart></PieChart> <!-- Include a pie chart from PieChart.vue component-->
+          </div>
+          </div>
         </div>
       </div>
     </div>

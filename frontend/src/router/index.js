@@ -16,8 +16,8 @@ const routes = [
     meta: { requiresAuth: true}
   },
   {
-    path: '/addService',
-    name: 'addService',
+    path: '/addservice',
+    name: 'addservice',
     props: true,
     component: () => import('../components/addService.vue'),
     meta: { requiresAuth: true, role: 1 }
@@ -68,7 +68,7 @@ const routes = [
       meta: { requiresAuth: true}
     },
     {
-      path: '/editService/:id',
+      path: '/editservice/:id',
       name: 'editservice',
       props: true,
       component: () => import('../components/editService.vue'),

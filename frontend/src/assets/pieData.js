@@ -23,6 +23,12 @@ export const pieChartData = {
         'rgb(0, 85, 18)'
       ]
     }]
+  },
+  options: {
+    responsive: true,
+    lineTension: 1,
+      width: 200,
+      height: 200
   }
 };
 export default pieChartData;
