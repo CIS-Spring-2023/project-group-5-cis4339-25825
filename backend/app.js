@@ -27,16 +27,21 @@ mongoose
   })
 
 // declare port number for the api
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 // setup and access request body
-app.use(express.json())
-app.use(morgan('dev'))
+app.use(express.json());
+app.use(morgan('dev'));
+
+//import routes
+const clientsRoute = require('./routes/clients');
+const eventsRoute = require('./routes/events');
+const organizationsRoute = require('./routes/org');
 
 // setup middle ware for routes
-app.use('/clients', require('./routes/clients'))
-app.use('/events', require('./routes/events'))
-app.use('/org', require('./routes/org'))
+app.use('/clients', clientsRoute);
+app.use('/events', eventsRoute)
+app.use('/org', organizationsRoute)
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)
