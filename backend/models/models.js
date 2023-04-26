@@ -167,7 +167,7 @@ const userSchema = new Schema({
   role: {
     type: Number,
     required: true,
-    default: 0,
+    default: 0, //default zero since one can still see features without having to login
   },
 }, {
   collection: 'users'
