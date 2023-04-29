@@ -48,7 +48,7 @@ export default {
       // If no errors found. then the form is submitted
       if (this.error==='') 
       {
-        /* axios
+        axios
           .post(`${apiURL}/services`, this.service)
           .then(() => {
             alert('Event has been added.')
@@ -56,7 +56,7 @@ export default {
           })
           .catch((error) => {
             console.log(error)
-          }) */
+          })
           // The newService object will store the newly created service from the form
           const newService = 
           {

@@ -87,7 +87,7 @@
               </router-link>
             </li>
             <li v-if="user.isLoggedIn">
-              <router-link to="/findservices">
+              <router-link to="/findservice">
                 <span
                   style="position: relative; top: 6px"
                   class="material-icons"
