@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const express = require('express')
 const router = express.Router()
 
@@ -11,7 +12,7 @@ const { orgs } = require('../models/models')
 // GET service by ID
 router.get('/getservice/:id', async (req, res) => {
     try {
-      const service = await Service.findById(req.params.id)
+      const service = await service.findById(req.params.id)
       res.json(service)
     } catch (err) {
       res.status(500).json({ message: err.message })
@@ -20,7 +21,7 @@ router.get('/getservice/:id', async (req, res) => {
 
 // POST create new service
 router.post('/createservice/', async (req, res) => {
-    const service = new Service({
+    const service = new service({
       name: req.body.name,
       description: req.body.description,
       status: req.body.status
@@ -36,7 +37,7 @@ router.post('/createservice/', async (req, res) => {
 // PUT update existing service
 router.put('/updateservice/:id', async (req, res) => {
     try {
-      const service = await Service.findById(req.params.id)
+      const service = await service.findById(req.params.id)
       if (req.body.name) {
         service.name = req.body.name
       }
@@ -56,7 +57,7 @@ router.put('/updateservice/:id', async (req, res) => {
 // DELETE existing service
 router.delete('/deleteservice/:id', async (req, res) => {
     try {
-      const service = await Service.findById(req.params.id)
+      const service = await service.findById(req.params.id)
       await service.remove()
       res.json({ message: 'Service has been deleted' })
     } catch (err) {

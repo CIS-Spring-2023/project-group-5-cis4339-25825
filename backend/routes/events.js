@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const express = require('express')
 const router = express.Router()
 
@@ -31,13 +32,12 @@ router.get('/event-by-zip-codes', async (req, res) => {
           count: { $sum: 1 }
         }
       }
-    ]);
-    res.status(200).json(eventsByZipCodes);
+    ])
+    res.status(200).json(eventsByZipCodes)
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: err.message })
   }
-});
-
+})
 
 // GET single event by ID
 router.get('/id/:id', (req, res, next) => {

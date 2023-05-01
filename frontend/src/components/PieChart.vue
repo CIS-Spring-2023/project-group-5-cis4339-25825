@@ -1,3 +1,8 @@
+<!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
+<!-- eslint-disable prettier/prettier -->
 <template>
   <div>
     <div class="flex flex-col col-span-2 content-center">
@@ -23,12 +28,11 @@
     <canvas id="pie-chart"></canvas>
   </div>
 </template>
-
 <script>
 import { Chart, registerables } from 'chart.js'
 
 //we have to register the registerables with Chart object
-Chart.register(...registerables);
+Chart.register(...registerables)
 
 export default {
   name: 'PieChart',
@@ -37,18 +41,20 @@ export default {
       pieChartData: {
         type: 'pie',
         data: {
-          labels: [],
-          datasets: [{
-            label: 'Number of attendees',
-            data: [],
-            backgroundColor: [
-              '#f6ad55',
-              '#dd6b20',
-              '#3b82f6',
-              '#ef4444',
-              '#10b981'
-            ]
-          }]
+          labels: [77449,78806,77067,77840,77650],
+          datasets: [
+            {
+              label: 'Number of attendees',
+              data: [2,1,3,4,5],
+              backgroundColor: [
+                '#f6ad55',
+                '#dd6b20',
+                '#3b82f6',
+                '#ef4444',
+                '#10b981'
+              ]
+            }
+          ]
         },
         options: {
           responsive: true,
@@ -61,30 +67,28 @@ export default {
       }
     }
   },
-  mounted(){
+  mounted() {
     // Mount to canvas with the id "pie-chart"
-    const ctx = document.getElementById('pie-chart');
+    const ctx = document.getElementById('pie-chart')
     // Create Chart
-    const chart = new Chart(ctx, this.pieChartData);
+    const chart = new Chart(ctx, this.pieChartData)
 
     // Fetch data from API
     fetch('/events/attendees-by-zipcode')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // Update chart data
-        chart.data.labels = data.map(item => item.zipCode);
-        chart.data.datasets[0].data = data.map(item => item.count);
-        chart.update();
+        chart.data.labels = data.map((item) => item.zipCode)
+        chart.data.datasets[0].data = data.map((item) => item.count)
+        chart.update()
 
         // Update table data
-        this.pieChartData.data.labels = data.map(item => item.zipCode);
-        this.pieChartData.data.datasets[0].data = data.map(item => item.count);
+        this.pieChartData.data.labels = data.map((item) => item.zipCode)
+        this.pieChartData.data.datasets[0].data = data.map((item) => item.count)
       })
-      .catch(error => {
-        console.log;
-      });
+      .catch((error) => {
+        console.log
+      })
   }
 }
 </script>
-
-
