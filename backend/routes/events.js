@@ -21,6 +21,24 @@ router.get('/', (req, res, next) => {
     .limit(10)
 })
 
+//GET events by zip code for pie chart data
+router.get('/event-by-zip-codes', async (req, res) => {
+  try {
+    const eventsByZipCodes = await Event.aggregate([
+      {
+        $group: {
+          _id: '$address.zip',
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+    res.status(200).json(eventsByZipCodes);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
 // GET single event by ID
 router.get('/id/:id', (req, res, next) => {
   // use findOne instead of find to not return array
