@@ -45,7 +45,7 @@ export default {
           datasets: [
             {
               label: 'Number of attendees',
-              data: [2,1,3,4,5],
+              data: [2,2,3,4,5],
               backgroundColor: [
                 '#f6ad55',
                 '#dd6b20',
