@@ -41,7 +41,7 @@ actions: {
       role: 0,
       isLoggedIn: false,
     });
-    this.$router.push("/");
+    this.$router.push("/login");
   }
 }
 });
