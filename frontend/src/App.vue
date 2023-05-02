@@ -26,8 +26,8 @@
                   >account_circle</span
                 > Welcome, {{ user.name }}
               </a>
-            </li>          
-            <li>
+            </li>
+            <li v-if = "user.isLoggedIn">
               <router-link to="/">
                 <span
                   style="position: relative; top: 6px"
@@ -106,6 +106,7 @@
                   </span> Logout 
                 </a>
               </li>
+            
           </ul>
         </nav>
       </header>
@@ -144,8 +145,20 @@ export default {
     setup() {
     const user = useLoggedInUserStore();
     return { user };
+  },
+
+
+logout() {
+    //Reset value after user log out
+    this.patch({
+      name: "",
+      role: 0,
+      isLoggedIn: false,
+    });
+    this.$router.push("/login");
   }
 }
+
 </script>
 
 
