@@ -8,7 +8,7 @@ const { services } = require('../models/models')
 /////////// APIs for 'Add Service' page /////////////////
 //All CRUD ops for services
 
-// GET 10 most recent events for org
+// GET 10 most recent events for services
 router.get('/', (req, res, next) => {
   services
     .find({ org: org }, (error, data) => {
@@ -63,7 +63,7 @@ router.get('/search/', (req, res, next) => {
   })
 })
 
-// POST new event
+// POST new service
 router.post('/', (req, res, next) => {
   const newService = req.body
   newService.org = org
@@ -76,7 +76,7 @@ router.post('/', (req, res, next) => {
   })
 })
 
-// PUT update event
+// PUT update service
 router.put('/update/:id', (req, res, next) => {
   services.findByIdAndUpdate(req.params.id, req.body, (error, data) => {
     if (error) {
@@ -99,14 +99,5 @@ router.delete('/:id', (req, res, next) => {
     }
   })
 })
-
-// POST create new service
-//router.post('/createservice/', async (req, res) => {
-
-// PUT update existing service
-//router.put('/updateservice/:id', async (req, res) => {
-
-// DELETE existing service
-//router.delete('/deleteservice/:id', async (req, res) => {
 
 module.exports = router
