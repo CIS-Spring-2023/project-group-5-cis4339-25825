@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 const express = require('express')
 const router = express.Router()
 
@@ -20,23 +19,6 @@ router.get('/', (req, res, next) => {
     // sort by date ascending
     .sort({ date: 1 })
     .limit(10)
-})
-
-//GET events by zip code for pie chart data
-router.get('/event-by-zip-codes', async (req, res) => {
-  try {
-    const eventsByZipCodes = await Event.aggregate([
-      {
-        $group: {
-          _id: '$address.zip',
-          count: { $sum: 1 }
-        }
-      }
-    ])
-    res.status(200).json(eventsByZipCodes)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
 })
 
 // GET single event by ID

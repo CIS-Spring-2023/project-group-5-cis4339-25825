@@ -37,11 +37,15 @@ app.use(morgan('dev'));
 const clientsRoute = require('./routes/clients');
 const eventsRoute = require('./routes/events');
 const organizationsRoute = require('./routes/org');
+const servicesRoute = require('./routes/services');
+const usersRoute = require('./routes/users');
 
 // setup middle ware for routes
 app.use('/clients', clientsRoute);
 app.use('/events', eventsRoute)
 app.use('/org', organizationsRoute)
+app.use('/services', servicesRoute)
+app.use('/users', usersRoute)
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`)

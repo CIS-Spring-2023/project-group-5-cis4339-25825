@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 const uuid = require('uuid')
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
@@ -131,54 +130,47 @@ const eventDataSchema = new Schema(
 )
 
 // Collection for services
-const serviceSchema = new Schema(
-  {
-    _id: {
-      type: String,
-      default: uuid.v1
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    status: {
-      type: String,
-      required: true,
-      enum: ['active', 'inactive'],
-      default: 'active'
-    }
+const serviceSchema = new Schema({
+  _id: {
+    type: String,
+    default: uuid.v1
   },
-  {
-    collection: 'services'
-  }
-)
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: String,
+    required: true,
+    }
+}, {
+  collection: 'services'
+});
 
-// Collection for users
-const userSchema = new Schema(
-  {
-    username: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    password: {
-      type: String,
-      required: true
-    },
-    role: {
-      type: Number,
-      required: true,
-      default: 0 //default zero since one can still see features without having to login
-    }
+// Collection for users 
+const userSchema = new Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  {
-    collection: 'users'
-  }
-)
+  password: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: Number,
+    required: true,
+    default: 0, //default zero since one can still see features without having to login
+  },
+}, {
+  collection: 'users'
+});
+
 
 // create models from mongoose schemas
 const clients = mongoose.model('client', clientDataSchema)
