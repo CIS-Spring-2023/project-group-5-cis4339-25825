@@ -9,7 +9,7 @@ export const useLoggedInUserStore = defineStore({
     return {
       name: "",
       role: 0,
-      isLoggedIn: false,
+      isLoggedIn: true,
     }
   },
 // Send username and password to the simulated loginAPI
@@ -34,17 +34,7 @@ actions: {
       alert("Invalid credentials. Please try again.");
     }
   },
-  logout() {
-    //Reset value after user log out
-    this.patch({
-      name: "",
-      role: 0,
-      isLoggedIn: false,
-    });
-    this.$router.push("/login");
-  }
-}
-});
+  
 //login API to check username and password match
 //username and password the same for now. Best to keep it simple for testing
 function apiLogin(u, p) {
