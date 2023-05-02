@@ -20,9 +20,9 @@ export default {
     handleSubmitForm() {
       let endpoint = ''
       if (this.searchBy === 'Service Name') {
-        endpoint = `services/search/?serviceName`
+        endpoint = `services/search/?serviceName="${this.serviceName}"&searchBy=name`
       } else if (this.searchBy === 'Service Description') {
-        endpoint = `services/search/?serviceDescription`
+        endpoint = `services/search/?serviceDescription"${this.serviceDescription}"&searchBy=description`
       }
       axios.get(`${apiURL}/${endpoint}`).then((res) => {
         this.services = res.data
